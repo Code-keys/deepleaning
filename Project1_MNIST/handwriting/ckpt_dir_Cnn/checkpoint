@@ -1,0 +1,3 @@
+model_checkpoint_path: "G:\\PYTHON_PRO\\Project1_MNIST\\handwriting\\ckpt_dir_Cnn/model.ckpt-1"
+all_model_checkpoint_paths: "G:\\PYTHON_PRO\\Project1_MNIST\\handwriting\\ckpt_dir_Cnn/model.ckpt-0"
+all_model_checkpoint_paths: "G:\\PYTHON_PRO\\Project1_MNIST\\handwriting\\ckpt_dir_Cnn/model.ckpt-1"
