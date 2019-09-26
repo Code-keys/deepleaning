@@ -40,6 +40,7 @@ model.add(Dropout(0.2))
 #第二层
 model.add(Dense(10))
 model.add(Activation("relu"))
+#model.add(Flatten())
 model.summary()
 
 #模型的编译运行
@@ -51,5 +52,6 @@ history = model.fit(a,b,
                     )
 #P评估
 score = model.evaluate(c,d,verbose=1)
+
 print("score" ,score[0])
 print("accuracy" ,score[1])
