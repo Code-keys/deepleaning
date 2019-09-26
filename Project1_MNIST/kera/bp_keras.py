@@ -30,7 +30,7 @@ d = np_utils.to_categorical(de_num(d),10)
 #建模 （序贯模型）  else 函数化模型
 model = Sequential()
 #第一层
-model.add(Dense(NB_C,input_shape=(784,),out_dim = 10))
+model.add(Dense(NB_C,input_shape=(784,)))
 model.add(Activation("softmax"))
 model.add(Dropout(0.2))
 #第二层

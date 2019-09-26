@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+"""from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 import argparse
@@ -131,3 +131,4 @@ with tf.Session(graph = g_CNN) as sess:
         global_step.assign(i).eval()  # 更新计数器
         saver.save(sess, ckpt_dir + "/model.ckpt", global_step=global_step)
     writer.close()
+"""
