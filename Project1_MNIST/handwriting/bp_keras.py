@@ -2,7 +2,6 @@ from __future__ import print_function
 from read import *
 import numpy as np
 from keras.models import Sequential
-
 from keras.layers.core import Dense,Activation,Dropout
 from keras.optimizers import SGD,Adam,RMSprop
 from keras.utils import np_utils
@@ -27,21 +26,23 @@ a.astype("float32")
 c.astype("float32")
 b = np_utils.to_categorical(de_num(b),10)
 d = np_utils.to_categorical(de_num(d),10)
-print(c.shape[0])
 
-#训练
+#建模 （序贯模型）  else 函数化模型
 model = Sequential()
 #第一层
 model.add(Dense(NB_C,input_shape=(784,)))
 model.add(Activation("softmax"))
 model.add(Dropout(0.2))
-
+#第二层
 model.add(Dense(N_HIDDENS))
-model.add(Activation("softmax"))
+model.add(Activation("relu"))
 model.add(Dropout(0.2))
-
+#第二层
+model.add(Dense(10))
+model.add(Activation("relu"))
 model.summary()
 
+#模型的编译运行
 model.compile(loss="MSE",optimizer=OP,metrics=["accuracy"])#编译
 
 history = model.fit(a,b,
