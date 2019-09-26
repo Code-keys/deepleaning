@@ -30,6 +30,13 @@ def onehot_mun(loaded_y):  # \编码  class
         loady.append(D[(change)])
     return loady
 
+def de_num(onehot):
+    num = list()
+    for i in onehot:
+        num.append(i.index(1))
+    return num
+
+
 def onehot_alph(loaded_y):
     """
     :param loaded_y: 输入为字母列表 或连续字母
@@ -44,6 +51,13 @@ def onehot_alph(loaded_y):
         onehot_encoded.append(letter)
 
     return onehot_encoded
+
+def de_alph(loaded_y):
+    de_alph = list()
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    for i in loaded_y:
+        de_alph.append(alphabet[i.index(1)])
+    return de_alph
 
 
 def readdata():
@@ -66,11 +80,13 @@ def readdata():
             y = np.fromfile(y, dtype=np.uint8)
         return y
 
-    loaded_x = _load_x("G:\PYTHON_PRO\Project1_MNIST\handwriting/data/train-images-idx3-ubyte")
-    loaded_y = _load_y('G:\PYTHON_PRO\Project1_MNIST\handwriting\data/train-labels-idx1-ubyte')
+    MAC = "/volumes/CO_OS/"
 
-    loaded_xte = _load_x("G:\PYTHON_PRO\Project1_MNIST\handwriting\data/t10k-images-idx3-ubyte")
-    loaded_yte = _load_y('G:\PYTHON_PRO\Project1_MNIST\handwriting\data/t10k-labels-idx1-ubyte')
+    loaded_x = _load_x(MAC + "PYTHON_PRO/Project1_MNIST/handwriting/data/train-images-idx3-ubyte")
+    loaded_y = _load_y(MAC + 'PYTHON_PRO/Project1_MNIST/handwriting/data/train-labels-idx1-ubyte')
+
+    loaded_xte = _load_x(MAC + "PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-images-idx3-ubyte")
+    loaded_yte = _load_y(MAC + 'PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-labels-idx1-ubyte')
 
     loaded_y = onehot_mun(loaded_y)
     loaded_yte = onehot_mun(loaded_yte)
@@ -85,5 +101,13 @@ if __name__ == '__main__':
     print(len(b))
     print(len(c))
     print(len(d))
-   # imshow(a,b,2)
-    print(onehot_alph("a"))
+
+    b = de_num(b)
+    print(b[5])
+
+
+    imshow(a,b,2)
+
+    a = onehot_alph("abcd")
+    print(a)
+    print(de_alph(a))

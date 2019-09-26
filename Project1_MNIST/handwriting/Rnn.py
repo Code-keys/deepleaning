@@ -12,7 +12,7 @@ trX, trY, teX, teY = readdata()
 
 g_Rnn = tf.Graph()
 with g_Rnn.as_default():
-
+    tf.sum
     lr = 0.001
     tr_num = 100000
     batch_size = 100
