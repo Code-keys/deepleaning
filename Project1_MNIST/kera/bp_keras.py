@@ -1,5 +1,5 @@
 from __future__ import print_function
-from read import *
+from Project1_MNIST.handwriting.read import *
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense,Activation,Dropout
@@ -30,7 +30,7 @@ d = np_utils.to_categorical(de_num(d),10)
 #建模 （序贯模型）  else 函数化模型
 model = Sequential()
 #第一层
-model.add(Dense(NB_C,input_shape=(784,)))
+model.add(Dense(NB_C,input_shape=(784,),out_dim = 10))
 model.add(Activation("softmax"))
 model.add(Dropout(0.2))
 #第二层
@@ -40,8 +40,13 @@ model.add(Dropout(0.2))
 #第二层
 model.add(Dense(10))
 model.add(Activation("relu"))
-#model.add(Flatten())
+
+
+
+
 model.summary()
+
+
 
 #模型的编译运行
 model.compile(loss="MSE",optimizer=OP,metrics=["accuracy"])#编译
