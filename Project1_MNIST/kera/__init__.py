@@ -9,6 +9,8 @@ from keras.layers.recurrent import Recurrent,SimpleRNN,GRU,LSTM # RNN
 
 from keras.layers.convolutional import Conv1D,Conv2D,MaxPooling1D,MaxPooling2D # CNN
 
+from keras.models import load_model
+model = load_model("mymodel.h5")
 """
 Dense层  FC层
 
@@ -36,7 +38,9 @@ keras.layers.core.Masking(mask_value=0.0)  使用给定的值对输入的序列�
 keras.layers.core.Highway(init='glorot_uniform', transform_bias=-2, activation='linear', weights=None, W_regularizer=None,
  #全连接FC                           b_regularizer=None, activity_regularizer=None, W_constraint=None, b_constraint=None, bias=True, input_dim=None)
 
-MaxoutDense层 全连接的Maxout层
+MaxoutDense（） #层 全连接的Maxout层
+
+keras.layers.normalization.BatchNormalization() #批归一化
 
 """
 

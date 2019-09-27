@@ -1,12 +1,14 @@
 from __future__ import print_function
+from keras.callbacks import ModelCheckpoint,TensorBoard
+from keras.models import load_model
+
 from Project1_MNIST.handwriting.read import *
 import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Dense,Activation,Dropout
 from keras.optimizers import SGD,Adam,RMSprop
 from keras.utils import np_utils
-np.random.seed(160)
-
+np.random.seed(10)
 
 #网络超参数
 NB_E = 200
@@ -16,7 +18,7 @@ NB_C = 10
 OP = SGD()
 N_HIDDENS = 128
 VALIDATION_SPLIT = 0.2
-
+MODEL_DIR = "/TMP"
 
 #read  datasets
 a, b, c, d = readdata()#  60000   +  10000
@@ -31,7 +33,7 @@ d = np_utils.to_categorical(de_num(d),10)
 model = Sequential()
 #第一层
 model.add(Dense(NB_C,input_shape=(784,)))
-model.add(Activation("softmax"))
+model.add(Activation('softmax'))
 model.add(Dropout(0.2))
 #第二层
 model.add(Dense(N_HIDDENS))
@@ -41,9 +43,6 @@ model.add(Dropout(0.2))
 model.add(Dense(10))
 model.add(Activation("relu"))
 
-
-
-
 model.summary()
 
 
@@ -51,12 +50,18 @@ model.summary()
 #模型的编译运行
 model.compile(loss="MSE",optimizer=OP,metrics=["accuracy"])#编译
 
+checkpoint = ModelCheckpoint(filepath=os.path.join(MODEL_DIR,"model-{epoch:02d}.h5"))
+
 history = model.fit(a,b,
                     batch_size=BAT,epochs=NB_E,
-                    verbose=1,validation_split=VALIDATION_SPLIT
+                    verbose=1,validation_split=VALIDATION_SPLIT,
+                    callbacks=[TensorBoard(log_dir='./tmp/log')]
                     )
 #P评估
 score = model.evaluate(c,d,verbose=1)
 
+" save model           json = model.to_json()#model.to_yaml()"
+#model.save("mymodel.h5")
 print("score" ,score[0])
 print("accuracy" ,score[1])
+

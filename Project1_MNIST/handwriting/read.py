@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def imshow(img,lable,mun):
     """
@@ -80,13 +81,16 @@ def readdata():
             y = np.fromfile(y, dtype=np.uint8)
         return y
 
-    MAC = "/volumes/CO_OS/"
+    if os.name == "nt":
+        DIR = "G:/"
+    else:
+        DIR = "/volumes/CO_OS/"
 
-    loaded_x = _load_x(MAC + "PYTHON_PRO/Project1_MNIST/handwriting/data/train-images-idx3-ubyte")
-    loaded_y = _load_y(MAC + 'PYTHON_PRO/Project1_MNIST/handwriting/data/train-labels-idx1-ubyte')
+    loaded_x = _load_x(DIR + "PYTHON_PRO/Project1_MNIST/handwriting/data/train-images-idx3-ubyte")
+    loaded_y = _load_y(DIR + 'PYTHON_PRO/Project1_MNIST/handwriting/data/train-labels-idx1-ubyte')
 
-    loaded_xte = _load_x(MAC + "PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-images-idx3-ubyte")
-    loaded_yte = _load_y(MAC + 'PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-labels-idx1-ubyte')
+    loaded_xte = _load_x(DIR + "PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-images-idx3-ubyte")
+    loaded_yte = _load_y(DIR + 'PYTHON_PRO/Project1_MNIST/handwriting/data/t10k-labels-idx1-ubyte')
 
     loaded_y = onehot_mun(loaded_y)
     loaded_yte = onehot_mun(loaded_yte)
